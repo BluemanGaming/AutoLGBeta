@@ -1,11 +1,11 @@
 
 
-local Ped = GetPlayerPedId
-local Vehicle = GetVehiclePedIsUsing
 
 Citizen.CreateThread(function()
 	while true do
-        Citizen.Wait(0)
+		local playerped = GetPlayerPed(-1)
+			if IsPedInAnyVehicle(playerped , false) then
+				local veh = GetVehiclePedIsUsing(playerped)
         if GetEntityHeightAboveGround(GetVehiclePedIsUsing(PlayerPedId()))>10.0 then
             GetLandingGearState(aircraft, 2)
             ControlLandingGear(aircraft, 1)
