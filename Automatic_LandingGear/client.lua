@@ -1,18 +1,24 @@
+
+
 local Ped = GetPlayerPedId
 local Vehicle = GetVehiclePedIsUsing
 
-
-GetEntityHeightAboveGround(GetVehiclePedIsUsing(PlayerPedId()))>10.0 then
-    GetLandingGearState(aircraft, 2)
-    ControlLandingGear(aircraft, 1)
-    TriggerEvent('chatMessage', "Plane", { 255, 26, 71 } " Landing Gear Deployed")
-elseif GetEntityHeightAboveGround(GetVehiclePedIsUsing(PlayerPedId()))<10.0 then
-    GetLandingGearState(aircraft, 1)
-    ControlLandingGear(aircraft, 2)
-    TriggerEvent('chatMessage', "Plane", { 255, 26, 71 } " Landing Gear Retracted")
-end
-
-
+Citizen.CreateThread(function()
+	while true do
+        Citizen.Wait(0)
+        if GetEntityHeightAboveGround(GetVehiclePedIsUsing(PlayerPedId()))>10.0 then
+            GetLandingGearState(aircraft, 2)
+            ControlLandingGear(aircraft, 1)
+            TriggerEvent('chatMessage', "Plane", { 255, 26, 71 }, " Landing Gear Deployed")
+        elseif GetEntityHeightAboveGround(GetVehiclePedIsUsing(PlayerPedId()))<10.0 then
+            GetLandingGearState(aircraft, 1)
+            ControlLandingGear(aircraft, 2)
+            TriggerEvent('chatMessage', "Plane", { 255, 26, 71 }, " Landing Gear Retracted")
+        end
+        Citizen.Wait(0)
+    end
+end)
+        
 
 
 
